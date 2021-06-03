@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0045)https://www.apu.ac.jp/~wave/game/index_e.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+
+<title>Nash Equilibrium and Pareto Optimalityin Game Theory</title>
+<link id="avast_os_ext_custom_font" href="chrome-extension://eofcbnmajmjmplflapaojjnihcjkigck/common/ui/fonts/fonts.css" rel="stylesheet" type="text/css"></head>
+<body text="#000000" bgcolor="#ffffff">
+
+
+
+<center>
+<b>A Program of Two Players Game in Strategic Form</b><br>
+(Written by JavaScript)<br>
+<a href="https://www.apu.ac.jp/~wave/game/index.html">Japanese</a><br>
+<br>
+
+<table><tbody><tr><td>
+
+<table border="1">
+<tbody><tr>
+<td rowspan="2" colspan="2"></td>
+<td colspan="2"><center>Player B</center></td>
+</tr>
+<tr>
+<td><center>Strategy 1</center></td><td><center>Strategy 2</center></td>
+</tr>
+<tr>
+<td rowspan="2">Player A</td><td><center>Strategy 1</center></td>
+
+<td width="150" height="88">
+<br>
+<center>
+<form name="form1">
+<input type="text" name="a2" size="3" placeholder="B">, <input type="text" name="a1" size="3"  placeholder="A">
+</form>
+</center>
+</td>
+
+<td width="150" height="88">
+<br>
+<center>
+<form name="form2">
+<input type="text" name="b2" size="3" placeholder="B">, <input type="text" name="b1" size="3" placeholder="A">
+</form>
+</center>
+</td>
+
+</tr>
+<tr><td><center>Strategy 2</center></td>
+
+<td width="150" height="88">
+<br>
+<center>
+<form name="form3">
+<input type="text" name="c2" size="3" placeholder="B">, <input type="text" name="c1" size="3" placeholder="A">
+</form>
+</center>
+</td>
+
+<td width="150" height="88">
+<br>
+<center>
+<form name="form4">
+<input type="text" name="d2" size="3" placeholder="B">, <input type="text" name="d1" size="3" placeholder="A">
+</form>
+</center>
+</td>
+
+</tr>
+</tbody></table>
+
+
+</td><td width="50"></td><td>
+
+<table border="1">
+<tbody><tr>
+<td rowspan="2" colspan="2"></td>
+<td colspan="2"><center>Player B</center></td>
+</tr>
+<tr>
+<td><center>Strategy 1</center></td><td><center>Strategy 2</center></td>
+</tr>
+<tr>
+<td rowspan="2">Player A</td><td><center>Strategy 1</center></td>
+
+<td>
+<img src="pic1.gif" name="img1" width="100" height="80">
+</td>
+
+<td>
+<img src="pic2.gif" name="img2" width="100" height="80">
+</td>
+
+</tr>
+<tr><td><center>Strategy 2</center></td>
+
+<td>
+<img src="pic3.gif" name="img3" width="100" height="80">
+</td>
+
+<td>
+<img src="pic4.gif" name="img4" width="100" height="80">
+</td>
+
+</tr>
+</tbody></table>
+
+</td></tr></tbody></table>
+
+<table border="0"><tbody><tr><td>
+<img src="nash.gif" width="50" height="40"></td><td>Nash equilibrium </td><td><img src="pareto.gif" width="50" height="40"></td><td>Pareto Optimality </td><td><img src="both.gif" width="50" height="40"></td><td>Nash equilibrium &amp; Pareto Optimality</td></tr></tbody></table>
+
+
+<form name="form5">
+<input type="button" value="Nash Eq" onclick="paretoop(),nash(),both(),dominate()">
+<input type="button" value="Clear" onclick="fresh()">
+</form>
+
+</center>
+
+
+
+<script language="JavaScript">
+<!--
+
+
+function fresh(){
+location.reload();
+}
+
+
+
+function paretoop(){
+
+
+anash=new Array(eval(document.form1.a1.value),eval(document.form2.b1.value),eval(document.form3.c1.value),eval(document.form4.d1.value));
+bnash=new Array(eval(document.form1.a2.value),eval(document.form2.b2.value),eval(document.form3.c2.value),eval(document.form4.d2.value));
+//anash=new Array(16,7,13,6);
+//bnash=new Array(12,13,7,6);
+console.log(bnash);
+console.log(anash);
+pareto=new Array(anash[0]+bnash[0],anash[1]+bnash[1],anash[2]+bnash[2],anash[3]+bnash[3]);
+
+po=Math.max(pareto[0],pareto[1],pareto[2],pareto[3]);
+
+p=new Array();
+
+
+for (i=0; i<4; i++){
+if(po==pareto[i]){
+n=i+1;
+if(n==1){
+document.img1.src="pareto.gif",p[0]=1;
+}
+else if(n==2){
+document.img2.src="pareto.gif",p[1]=1;
+}
+else if(n==3){
+document.img3.src="pareto.gif",p[2]=1;
+}
+else{
+document.img4.src="pareto.gif",p[3]=1;
+}
+
+}
+}
+
+
+
+}
+
+function dominate(){
+	console.log("Le strategie dominanti sono:" )
+	if(anash[0] > anash[2] && anash[1] > anash[3])
+		console.log("a.strategy1 e' dominante");
+	if(anash[0] < anash[2] && anash[1] < anash[3])
+		console.log("a.strategy2 e' dominante");
+	if(bnash[0] > bnash[1] && bnash[2] > bnash[3])
+		console.log("b.strategy1 e' dominante");
+	if(bnash[0] < bnash[1] && bnash[2] < bnash[3])
+		console.log("b.strategy2 e' dominante");
+}
+
+function nash(){
+
+n=new Array();
+
+if((anash[0]>anash[2])&&(bnash[0]>bnash[1])){
+document.img1.src="nash.gif",n[0]=1;
+}
+
+if((anash[1]>anash[3])&&(bnash[1]>bnash[0])){
+document.img2.src="nash.gif",n[1]=1;
+}
+
+if((anash[2]>anash[0])&&(bnash[2]>bnash[3])){
+document.img3.src="nash.gif",n[2]=1;
+}
+
+if((anash[3]>anash[1])&&(bnash[3]>bnash[2])){
+document.img4.src="nash.gif",n[3]=1;
+}
+
+else{
+}
+
+}
+
+
+function both(){
+
+b=new Array();
+
+for (i=0; i<4; i++){
+if((n[i]==1)&&(p[i]==1)){
+b[i]=1
+}
+}
+
+if(b[0]==1){
+document.img1.src="both.gif";
+}
+
+
+if(b[1]==1){
+document.img2.src="both.gif";
+}
+
+
+
+if(b[2]==1){
+document.img3.src="both.gif";
+}
+
+
+if(b[3]==1){
+document.img4.src="both.gif";
+}
+
+
+else{
+}
+
+}
+
+
+//-->
+</script>
+
+
+</body></html>
